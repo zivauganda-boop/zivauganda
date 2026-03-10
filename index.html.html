@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ziva Uganda – Shine From Within</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue:#1E6FD9; --blue-dark:#1355A8; --blue-pale:#EBF2FD;
+  --orange:#F5A623; --orange-light:#FDD87A; --orange-pale:#FEF3D0;
+  --white:#FFFFFF; --warm-bg:#F5F8FF;
+  --dark:#0D1F3C; --text:#1A2E50; --muted:#6B7FA3;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--text);overflow-x:hidden;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 5%;background:rgba(255,255,255,.96);backdrop-filter:blur(14px);border-bottom:1px solid rgba(30,111,217,.08);transition:box-shadow .3s;}
+nav.scrolled{box-shadow:0 4px 30px rgba(30,111,217,.1);}
+.nav-logo{display:flex;align-items:center;text-decoration:none;}
+.nav-logo img{height:40px;width:auto;object-fit:contain;}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center;}
+.nav-links a{text-decoration:none;color:var(--muted);font-size:.88rem;font-weight:500;transition:color .2s;position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:2px;background:var(--orange);border-radius:2px;transform:scaleX(0);transition:transform .25s;}
+.nav-links a:hover{color:var(--blue);}
+.nav-links a:hover::after{transform:scaleX(1);}
+.nav-cta{background:var(--blue)!important;color:white!important;padding:.5rem 1.4rem;border-radius:50px;font-weight:600!important;box-shadow:0 4px 14px rgba(30,111,217,.25);transition:background .2s,transform .2s!important;}
+.nav-cta:hover{background:var(--blue-dark)!important;transform:translateY(-1px);}
+.nav-cta::after{display:none!important;}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;}
+.nav-hamburger span{display:block;width:24px;height:2px;background:var(--blue);border-radius:2px;transition:all .3s;}
+
+/* HERO */
+#home{min-height:100vh;background:var(--warm-bg);display:flex;align-items:center;padding:7rem 5% 4rem;position:relative;overflow:hidden;}
+.orb{position:absolute;border-radius:50%;pointer-events:none;}
+.orb1{width:600px;height:600px;background:radial-gradient(circle,rgba(30,111,217,.07),transparent 70%);top:-150px;right:-120px;animation:float 9s ease-in-out infinite;}
+.orb2{width:400px;height:400px;background:radial-gradient(circle,rgba(245,166,35,.09),transparent 70%);bottom:-80px;left:-100px;animation:float 7s ease-in-out infinite;animation-delay:-3s;}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-22px);}}
+
+.hero-content{max-width:600px;position:relative;z-index:2;animation:fadeUp .85s ease both;}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:var(--orange-pale);border:1px solid var(--orange-light);border-radius:50px;padding:.35rem 1rem;font-size:.74rem;font-weight:700;color:#A0680A;margin-bottom:1.6rem;letter-spacing:.06em;text-transform:uppercase;}
+
+h1{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,5.5vw,4.2rem);font-weight:900;line-height:1.08;color:var(--dark);margin-bottom:1.3rem;}
+h1 em{font-style:italic;color:var(--blue);position:relative;display:inline-block;}
+h1 em::after{content:'';position:absolute;bottom:3px;left:0;right:0;height:3px;background:var(--orange);border-radius:2px;transform-origin:left;animation:lineGrow 1s .8s ease both;}
+@keyframes lineGrow{from{transform:scaleX(0);}to{transform:scaleX(1);}}
+
+.hero-sub{font-size:1rem;color:var(--muted);line-height:1.75;margin-bottom:2.2rem;max-width:490px;}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;}
+.btn-primary{background:var(--orange);color:var(--dark);padding:.85rem 2rem;border-radius:50px;font-weight:700;font-size:.95rem;text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 20px rgba(245,166,35,.4);}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(245,166,35,.5);}
+.btn-outline{border:2px solid var(--blue);color:var(--blue);padding:.82rem 2rem;border-radius:50px;font-weight:600;font-size:.95rem;text-decoration:none;transition:all .2s;}
+.btn-outline:hover{background:var(--blue);color:white;}
+
+.hero-stats{display:flex;gap:2.5rem;margin-top:3rem;padding-top:2rem;border-top:1px solid rgba(30,111,217,.1);}
+.stat-num{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;color:var(--blue);display:block;}
+.stat-label{font-size:.77rem;color:var(--muted);font-weight:500;}
+
+.hero-visual{position:absolute;right:5%;top:50%;transform:translateY(-50%);width:min(380px,36%);animation:fadeUp .9s .35s ease both;}
+.hero-card{background:white;border-radius:24px;padding:2.2rem;box-shadow:0 20px 60px rgba(30,111,217,.12);position:relative;}
+.hero-card::before{content:'';position:absolute;inset:-2px;border-radius:26px;background:linear-gradient(135deg,var(--orange),#4E8FE5);z-index:-1;opacity:.2;}
+.hc-logo{margin-bottom:1.2rem;}
+.hc-logo img{height:30px;object-fit:contain;}
+.hc-quote{font-family:'Playfair Display',serif;font-size:1.05rem;font-style:italic;color:var(--dark);line-height:1.6;margin-bottom:.8rem;}
+.hc-sub{font-size:.8rem;color:var(--muted);}
+.fpill{position:absolute;background:white;border-radius:50px;padding:.5rem .95rem;box-shadow:0 8px 25px rgba(0,0,0,.1);font-size:.76rem;font-weight:600;display:flex;align-items:center;gap:.35rem;animation:float 6s ease-in-out infinite;}
+.fpill.p1{top:-1.3rem;right:1.5rem;color:var(--blue);animation-delay:-2s;}
+.fpill.p2{bottom:-1rem;left:.8rem;color:#A0680A;animation-delay:-4s;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+
+/* SECTIONS */
+section{padding:5.5rem 5%;}
+.section-label{display:inline-flex;align-items:center;gap:.6rem;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:1rem;}
+.section-label::before,.section-label::after{content:'';width:22px;height:2px;background:var(--orange);border-radius:2px;display:inline-block;}
+h2{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,4vw,2.7rem);font-weight:900;color:var(--dark);line-height:1.15;margin-bottom:1rem;}
+h2 span{color:var(--blue);}
+.section-intro{font-size:.97rem;color:var(--muted);line-height:1.75;max-width:540px;}
+
+/* ABOUT */
+#about{background:white;}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;margin-top:3.5rem;}
+.about-text p{font-size:.95rem;color:var(--muted);line-height:1.82;margin-bottom:1.2rem;}
+.about-text p strong{color:var(--text);}
+.values-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.8rem;}
+.value-chip{background:var(--blue-pale);border-radius:14px;padding:1rem 1.1rem;border-left:3px solid var(--blue);}
+.value-chip h4{font-size:.82rem;font-weight:700;color:var(--blue);margin-bottom:.25rem;}
+.value-chip p{font-size:.76rem;color:var(--muted);line-height:1.5;}
+
+.vision-box{background:linear-gradient(135deg,var(--blue),var(--blue-dark));border-radius:24px;padding:2.5rem;color:white;position:relative;overflow:hidden;}
+.vision-box::after{content:'';position:absolute;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.04);right:-40px;bottom:-40px;}
+.vb-label{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--orange-light);font-weight:700;margin-bottom:.8rem;}
+.vision-box p{font-family:'Playfair Display',serif;font-size:1.1rem;font-style:italic;line-height:1.65;color:rgba(255,255,255,.92);position:relative;z-index:1;}
+.mission-box{background:var(--orange-pale);border-radius:18px;padding:1.8rem;margin-top:1.2rem;border:1px solid var(--orange-light);}
+.mb-label{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:#A0680A;font-weight:700;margin-bottom:.6rem;}
+.mission-box p{font-size:.88rem;color:var(--text);line-height:1.75;}
+
+/* PROGRAMS */
+#programs{background:var(--warm-bg);}
+.programs-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;flex-wrap:wrap;gap:1.5rem;}
+.programs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:1.4rem;}
+.program-card{background:white;border-radius:20px;padding:2rem;border:1px solid rgba(30,111,217,.07);transition:transform .3s,box-shadow .3s;position:relative;overflow:hidden;}
+.program-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(30,111,217,.1);}
+.program-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--orange),var(--blue));}
+.prog-icon{width:50px;height:50px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:1.2rem;}
+.prog-icon.o{background:var(--orange-pale);}
+.prog-icon.b{background:var(--blue-pale);}
+.program-card h3{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--dark);margin-bottom:.5rem;}
+.program-card p{font-size:.85rem;color:var(--muted);line-height:1.65;}
+.prog-tag{display:inline-block;margin-top:1rem;background:var(--blue-pale);color:var(--blue);font-size:.7rem;font-weight:700;letter-spacing:.04em;padding:.28rem .8rem;border-radius:50px;}
+
+/* AUDIENCE */
+#audience{background:white;}
+.audience-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:5rem;align-items:center;margin-top:3rem;}
+.age-card{background:linear-gradient(135deg,var(--blue-pale),white);border-radius:24px;padding:2.5rem;text-align:center;border:1px solid rgba(30,111,217,.12);}
+.age-num{font-family:'Playfair Display',serif;font-size:4rem;font-weight:900;color:var(--blue);line-height:1;}
+.age-card p{font-size:.85rem;color:var(--muted);margin-top:.5rem;}
+.mini-cards{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.2rem;}
+.mini-card{border-radius:16px;padding:1.3rem;text-align:center;}
+.mini-card.bl{background:var(--blue-pale);}
+.mini-card.or{background:var(--orange-pale);}
+.mini-card strong{display:block;font-size:1rem;font-weight:700;color:var(--blue);}
+.mini-card.or strong{color:#A0680A;}
+.mini-card span{font-size:.75rem;color:var(--muted);}
+.key-msg{background:var(--warm-bg);border-radius:18px;padding:1.5rem;margin-top:1rem;border:1px solid rgba(30,111,217,.08);text-align:center;}
+.key-msg p{font-family:'Playfair Display',serif;font-style:italic;font-size:.95rem;color:var(--dark);line-height:1.6;}
+
+.audience-list{list-style:none;}
+.audience-list li{display:flex;align-items:flex-start;gap:1rem;padding:1rem 0;border-bottom:1px solid rgba(30,111,217,.07);}
+.audience-list li:last-child{border-bottom:none;}
+.al-dot{width:10px;height:10px;border-radius:50%;background:var(--orange);flex-shrink:0;margin-top:5px;}
+.al-dot.b{background:var(--blue);}
+.al-text strong{display:block;font-size:.88rem;color:var(--dark);}
+.al-text span{font-size:.8rem;color:var(--muted);}
+
+/* CONTACT */
+#contact{background:linear-gradient(135deg,var(--dark) 0%,#0A2250 100%);color:white;text-align:center;position:relative;overflow:hidden;padding:5.5rem 5%;}
+#contact::before{content:'';position:absolute;top:-180px;left:50%;transform:translateX(-50%);width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(30,111,217,.08),transparent 65%);}
+#contact h2{color:white;}
+#contact h2 span{color:var(--orange);}
+#contact .section-intro{color:rgba(255,255,255,.6);margin:0 auto 3rem;}
+
+.contact-cards{display:flex;justify-content:center;gap:1.2rem;flex-wrap:wrap;margin-top:2.5rem;}
+.contact-card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:1.6rem 1.8rem;min-width:180px;text-align:center;transition:background .2s,transform .2s;text-decoration:none;}
+.contact-card:hover{background:rgba(255,255,255,.13);transform:translateY(-3px);}
+.cc-icon{font-size:1.6rem;margin-bottom:.7rem;}
+.cc-label{font-size:.67rem;letter-spacing:.1em;text-transform:uppercase;color:var(--orange-light);font-weight:700;margin-bottom:.4rem;}
+.cc-val{font-size:.88rem;color:rgba(255,255,255,.85);font-weight:500;}
+
+.contact-form-wrap{max-width:500px;margin:3rem auto 0;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:24px;padding:2.5rem;text-align:left;position:relative;z-index:2;}
+.contact-form-wrap h3{font-family:'Playfair Display',serif;font-size:1.25rem;color:white;margin-bottom:1.5rem;}
+.form-row{margin-bottom:1.15rem;}
+.form-row label{display:block;font-size:.73rem;font-weight:600;color:rgba(255,255,255,.55);margin-bottom:.4rem;letter-spacing:.04em;text-transform:uppercase;}
+.form-row input,.form-row textarea,.form-row select{width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:10px;padding:.85rem 1rem;color:white;font-family:'DM Sans',sans-serif;font-size:.88rem;outline:none;transition:border .2s;appearance:none;}
+.form-row input::placeholder,.form-row textarea::placeholder{color:rgba(255,255,255,.28);}
+.form-row input:focus,.form-row textarea:focus,.form-row select:focus{border-color:var(--orange);}
+.form-row textarea{resize:vertical;min-height:105px;}
+.form-row select option{background:#0D1F3C;color:white;}
+.form-submit{width:100%;background:var(--orange);color:var(--dark);border:none;border-radius:50px;padding:.95rem;font-family:'DM Sans',sans-serif;font-weight:700;font-size:.95rem;cursor:pointer;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 18px rgba(245,166,35,.3);}
+.form-submit:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(245,166,35,.45);}
+
+/* FOOTER */
+footer{background:#060F1E;padding:2.2rem 5%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;border-top:1px solid rgba(255,255,255,.05);}
+.footer-left{display:flex;align-items:center;gap:1rem;}
+.footer-left img{height:30px;filter:brightness(0) invert(1);opacity:.45;}
+.footer-tagline{font-size:.8rem;color:rgba(255,255,255,.3);}
+.footer-right{text-align:right;}
+.footer-copy{font-size:.76rem;color:rgba(255,255,255,.28);}
+.footer-social{font-size:.82rem;color:rgba(255,255,255,.45);margin-bottom:.3rem;}
+.footer-social a{color:var(--orange-light);text-decoration:none;}
+
+/* TOAST */
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(100px);background:white;color:var(--dark);padding:1rem 2rem;border-radius:50px;box-shadow:0 10px 40px rgba(0,0,0,.15);font-weight:600;font-size:.88rem;display:flex;align-items:center;gap:.6rem;transition:transform .4s cubic-bezier(.175,.885,.32,1.275);z-index:999;border-left:4px solid var(--orange);}
+.toast.show{transform:translateX(-50%) translateY(0);}
+
+/* MOBILE */
+@media(max-width:960px){
+  .hero-visual{display:none;}
+  .about-grid,.audience-grid{grid-template-columns:1fr;gap:2.5rem;}
+  .nav-links{display:none;}
+  .nav-links.open{display:flex;flex-direction:column;position:fixed;top:64px;left:0;right:0;background:white;padding:1.5rem 5%;gap:1.2rem;box-shadow:0 10px 30px rgba(0,0,0,.08);border-bottom:1px solid rgba(30,111,217,.07);}
+  .nav-hamburger{display:flex;}
+}
+@media(max-width:600px){
+  section{padding:4rem 5%;}
+  .hero-stats{gap:1.5rem;}
+  .values-grid{grid-template-columns:1fr;}
+  h1{font-size:2.4rem;}
+  .programs-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#home" class="nav-logo">
+    <img src="ziva-logo-color.jpeg" alt="Ziva Uganda">
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home" onclick="closeMenu()">Home</a></li>
+    <li><a href="#about" onclick="closeMenu()">About</a></li>
+    <li><a href="#programs" onclick="closeMenu()">Programs</a></li>
+    <li><a href="#audience" onclick="closeMenu()">Who We Serve</a></li>
+    <li><a href="#contact" class="nav-cta" onclick="closeMenu()">Get Involved</a></li>
+  </ul>
+  <div class="nav-hamburger" id="hamburger" onclick="toggleMenu()">
+    <span id="h1"></span><span id="h2"></span><span id="h3"></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="hero-content">
+    <div class="hero-badge">✦ Empowering Young Uganda</div>
+    <h1>Every Girl Deserves to <em>Shine</em> From Within</h1>
+    <p class="hero-sub">Ziva Uganda improves the health, dignity, and wellbeing of adolescent girls and young women — through education, mentorship, and community engagement across Uganda.</p>
+    <div class="hero-actions">
+      <a href="#programs" class="btn-primary">Our Programs ↓</a>
+      <a href="#contact" class="btn-outline">Partner With Us</a>
+    </div>
+    <div class="hero-stats">
+      <div><span class="stat-num">10–24</span><span class="stat-label">Age group we serve</span></div>
+      <div><span class="stat-num">4</span><span class="stat-label">Core focus areas</span></div>
+      <div><span class="stat-num">100%</span><span class="stat-label">Dignity-centered</span></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-card">
+      <div class="fpill p1">✦ Health Education</div>
+      <div class="hc-logo"><img src="ziva-logo-color.jpeg" alt="Ziva Uganda"></div>
+      <p class="hc-quote">"Every girl deserves the confidence and dignity to go to school during her period."</p>
+      <p class="hc-sub">Ziva Uganda — Shine From Within</p>
+      <div class="fpill p2">🌸 Dignity &amp; Empowerment</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div style="text-align:center;max-width:620px;margin:0 auto 3rem;">
+    <div class="section-label">Who We Are</div>
+    <h2>Born from a belief that <span>young people deserve to shine</span></h2>
+    <p class="section-intro">Ziva means radiance, brilliance, light. We stand at the intersection of health, dignity, faith, and youth empowerment.</p>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>Too many girls miss school because of <strong>period shame, lack of information, or lack of basic hygiene resources</strong>. Too many young people navigate puberty and health challenges without guidance.</p>
+      <p>Ziva Uganda was born to change that — through education, mentorship, and community engagement that helps young people discover the confidence and dignity that already lives within them.</p>
+      <p>Because when young people shine from within, <strong>communities shine too.</strong></p>
+      <div class="values-grid">
+        <div class="value-chip"><h4>Dignity</h4><p>Every young person deserves respect and self-worth</p></div>
+        <div class="value-chip"><h4>Truth &amp; Education</h4><p>Young people deserve accurate health information</p></div>
+        <div class="value-chip"><h4>Compassion</h4><p>Meet youth where they are, without judgment</p></div>
+        <div class="value-chip"><h4>Empowerment</h4><p>Help young people make informed choices</p></div>
+      </div>
+    </div>
+    <div>
+      <div class="vision-box">
+        <div class="vb-label">Our Vision</div>
+        <p>"A generation of young people in Uganda who are healthy, confident, informed, and shining from within."</p>
+      </div>
+      <div class="mission-box">
+        <div class="mb-label">Our Mission</div>
+        <p>To improve the health, dignity, and wellbeing of young people — especially adolescent girls and young women — through education, access to services, mentorship, and community engagement.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMS -->
+<section id="programs">
+  <div class="programs-header">
+    <div>
+      <div class="section-label">What We Do</div>
+      <h2>Programs Built for <span>Real Lives</span></h2>
+    </div>
+    <p class="section-intro" style="max-width:320px;margin:0;">Practical solutions — not charity. Every program is designed to meet young people where they are.</p>
+  </div>
+  <div class="programs-grid">
+    <div class="program-card">
+      <div class="prog-icon o">🌸</div>
+      <h3>Ziva School Health Clubs</h3>
+      <p>Peer-led health education in schools addressing period poverty, menstrual stigma, and hygiene access — with dignity at the centre.</p>
+      <span class="prog-tag">Menstrual Health</span>
+    </div>
+    <div class="program-card">
+      <div class="prog-icon b">🎒</div>
+      <h3>Ziva Dignity Kits</h3>
+      <p>Menstrual hygiene kits for girls — ensuring no student misses school because of a lack of basic resources.</p>
+      <span class="prog-tag">Hygiene Access</span>
+    </div>
+    <div class="program-card">
+      <div class="prog-icon o">💬</div>
+      <h3>Ziva Conversations</h3>
+      <p>Safe, youth-friendly discussions about puberty, reproductive health, mental health, confidence, and self-care — without shame.</p>
+      <span class="prog-tag">Adolescent Health</span>
+    </div>
+    <div class="program-card">
+      <div class="prog-icon b">🎓</div>
+      <h3>Ziva Campus Ambassadors</h3>
+      <p>University students trained to lead youth health advocacy in their communities, building the next generation of leaders.</p>
+      <span class="prog-tag">Youth Empowerment</span>
+    </div>
+    <div class="program-card">
+      <div class="prog-icon o">🏘️</div>
+      <h3>Community Health Outreach</h3>
+      <p>Connecting schools and communities to health services and awareness programs that create lasting impact.</p>
+      <span class="prog-tag">Community Engagement</span>
+    </div>
+    <div class="program-card" style="background:linear-gradient(135deg,var(--blue),var(--blue-dark));border:none;">
+      <div style="font-size:2.2rem;margin-bottom:1.1rem;">✦</div>
+      <h3 style="color:white;font-family:'Playfair Display',serif;">Want to partner with Ziva?</h3>
+      <p style="color:rgba(255,255,255,.72);font-size:.85rem;line-height:1.6;margin:.6rem 0 1.4rem;">We collaborate with schools, NGOs, faith communities, and health professionals.</p>
+      <a href="#contact" style="display:inline-block;background:var(--orange);color:var(--dark);padding:.65rem 1.5rem;border-radius:50px;font-weight:700;font-size:.85rem;text-decoration:none;">Get In Touch →</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHO WE SERVE -->
+<section id="audience">
+  <div class="audience-grid">
+    <div>
+      <div class="age-card">
+        <div class="age-num">10–24</div>
+        <p>Years old — our primary focus group</p>
+      </div>
+      <div class="mini-cards">
+        <div class="mini-card bl"><strong>Schools</strong><span>Primary delivery</span></div>
+        <div class="mini-card or"><strong>Community</strong><span>Engagement &amp; outreach</span></div>
+      </div>
+      <div class="key-msg">
+        <p>"Confidence begins from within — and when young people thrive, communities shine too."</p>
+      </div>
+    </div>
+    <div>
+      <div class="section-label">Who We Serve</div>
+      <h2>Centered on <span>Girls &amp; Young Women</span></h2>
+      <p class="section-intro" style="margin-bottom:2rem;">Our work is designed around adolescent girls — while engaging the full community that shapes their lives.</p>
+      <ul class="audience-list">
+        <li><div class="al-dot"></div><div class="al-text"><strong>Primary: Adolescent Girls &amp; Young Women</strong><span>Ages 10 to 24 — the heart of everything we do</span></div></li>
+        <li><div class="al-dot b"></div><div class="al-text"><strong>University Students &amp; Youth Leaders</strong><span>Building tomorrow's advocates through Campus Ambassadors</span></div></li>
+        <li><div class="al-dot"></div><div class="al-text"><strong>Teachers &amp; School Administrators</strong><span>Equipping educators to create safe, informed environments</span></div></li>
+        <li><div class="al-dot b"></div><div class="al-text"><strong>Parents, Community &amp; Faith Leaders</strong><span>Because lasting change involves the whole community</span></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div style="position:relative;z-index:2;">
+    <div class="section-label" style="justify-content:center;color:rgba(255,255,255,.45);">
+      <span style="background:var(--orange);width:22px;height:2px;border-radius:2px;display:inline-block;"></span>
+      Get Involved
+      <span style="background:var(--orange);width:22px;height:2px;border-radius:2px;display:inline-block;"></span>
+    </div>
+    <h2>Let's Work Together to <span>Help Girls Shine</span></h2>
+    <p class="section-intro">Whether you're a school, NGO, health professional, or community leader — Ziva Uganda welcomes your partnership.</p>
+
+    <div class="contact-cards">
+      <a href="tel:+256760274214" class="contact-card">
+        <div class="cc-icon">📞</div>
+        <div class="cc-label">Phone</div>
+        <div class="cc-val">+256 760 274 214</div>
+      </a>
+      <a href="mailto:zivauganda@gmail.com" class="contact-card">
+        <div class="cc-icon">✉️</div>
+        <div class="cc-label">Email</div>
+        <div class="cc-val">zivauganda@gmail.com</div>
+      </a>
+      <a href="https://instagram.com/zivauganda" target="_blank" class="contact-card">
+        <div class="cc-icon">📱</div>
+        <div class="cc-label">Instagram</div>
+        <div class="cc-val">@zivauganda</div>
+      </a>
+      <a href="https://twitter.com/zivauganda" target="_blank" class="contact-card">
+        <div class="cc-icon">🐦</div>
+        <div class="cc-label">Twitter / X</div>
+        <div class="cc-val">@zivauganda</div>
+      </a>
+      <a href="https://facebook.com/zivauganda" target="_blank" class="contact-card">
+        <div class="cc-icon">🌐</div>
+        <div class="cc-label">Facebook</div>
+        <div class="cc-val">@zivauganda</div>
+      </a>
+    </div>
+
+    <div class="contact-form-wrap">
+      <h3>Send Us a Message</h3>
+      <div class="form-row">
+        <label>Your Name</label>
+        <input type="text" placeholder="Full name" id="f-name">
+      </div>
+      <div class="form-row">
+        <label>Email or Phone</label>
+        <input type="text" placeholder="your@email.com or +256..." id="f-email">
+      </div>
+      <div class="form-row">
+        <label>I am a...</label>
+        <select id="f-role">
+          <option value="">Select your role</option>
+          <option>School / Teacher</option>
+          <option>Parent / Community Member</option>
+          <option>NGO / Health Professional</option>
+          <option>Faith Leader</option>
+          <option>Youth Leader / Student</option>
+          <option>Donor / Supporter</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label>Message</label>
+        <textarea placeholder="Tell us how you'd like to get involved..." id="f-msg"></textarea>
+      </div>
+      <button class="form-submit" onclick="handleSubmit()">Send Message ✦</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">
+    <img src="ziva-logo-color.jpeg" alt="Ziva Uganda">
+    <span class="footer-tagline">Shine From Within ✦</span>
+  </div>
+  <div class="footer-right">
+    <div class="footer-social">Follow us: <a href="https://instagram.com/zivauganda" target="_blank">@zivauganda</a></div>
+    <div class="footer-copy">© 2025 Ziva Uganda. All rights reserved.</div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  // Scrolled nav
+  window.addEventListener('scroll',()=>document.getElementById('navbar').classList.toggle('scrolled',scrollY>40));
+
+  // Mobile menu
+  let menuOpen=false;
+  function toggleMenu(){
+    menuOpen=!menuOpen;
+    document.getElementById('navLinks').classList.toggle('open',menuOpen);
+  }
+  function closeMenu(){
+    menuOpen=false;
+    document.getElementById('navLinks').classList.remove('open');
+  }
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click',e=>{
+      const t=document.querySelector(a.getAttribute('href'));
+      if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}
+    });
+  });
+
+  // Form
+  function handleSubmit(){
+    const name=document.getElementById('f-name').value.trim();
+    const contact=document.getElementById('f-email').value.trim();
+    if(!name||!contact){showToast('⚠️ Please fill in your name and contact.');return;}
+    ['f-name','f-email','f-msg'].forEach(id=>document.getElementById(id).value='');
+    document.getElementById('f-role').value='';
+    showToast('🌟 Thank you, '+name+'! We\'ll be in touch soon.');
+  }
+
+  function showToast(msg){
+    const t=document.getElementById('toast');
+    t.textContent=msg;
+    t.classList.add('show');
+    setTimeout(()=>t.classList.remove('show'),4000);
+  }
+</script>
+</body>
+</html>
